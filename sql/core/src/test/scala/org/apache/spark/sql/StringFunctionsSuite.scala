@@ -228,6 +228,16 @@ class StringFunctionsSuite extends QueryTest with SharedSQLContext {
       Row(1, 2, 0))
   }
 
+  test("string replace") {
+    val df = Seq(
+      ("ABCdef", "def", "DEF")).toDF("a", "b", "c")
+
+    checkAnswer(
+      df.select(
+        replace($"a", "def", "DEF")),
+      Row("ABCDEF") :: Nil)
+  }
+
   test("string padding functions") {
     val df = Seq(("hi", 5, "??")).toDF("a", "b", "c")
 

@@ -2298,6 +2298,17 @@ object functions {
    * @group string_funcs
    * @since 1.5.0
    */
+  def replace(src: Column, search: String, replace: String): Column = withExpr {
+    StringReplace(src.expr, lit(search).expr, lit(replace).expr)
+  }
+
+  /**
+   * Left-pad the string column with pad to a length of len. If the string column is longer
+   * than len, the return value is shortened to len characters.
+   *
+   * @group string_funcs
+   * @since 1.5.0
+   */
   def lpad(str: Column, len: Int, pad: String): Column = withExpr {
     StringLPad(str.expr, lit(len).expr, lit(pad).expr)
   }
